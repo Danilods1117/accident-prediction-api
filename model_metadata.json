@@ -1,0 +1,9 @@
+{
+  "model_type": "LogisticRegression",
+  "accuracy": 0.9599313108185461,
+  "training_samples": 6984,
+  "test_samples": 1747,
+  "feature_count": 2894,
+  "accident_prone_threshold": 12,
+  "total_accident_prone_areas": 215
+}
