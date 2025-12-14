@@ -1,6 +1,5 @@
 name: Build Flutter APK
 
-# Triggers: Run on push to main branch or manually
 on:
   push:
     branches: [ main ]
@@ -12,33 +11,39 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    # Step 1: Checkout code
     - name: Checkout code
       uses: actions/checkout@v4
     
-    # Step 2: Setup Java 17
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: '17'
     
-    # Step 3: Setup Flutter
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.24.5'
         channel: 'stable'
     
-    # Step 4: Get dependencies
+    - name: Flutter doctor
+      run: flutter doctor -v
+    
+    - name: Clean project
+      run: flutter clean
+    
+    # Auto-upgrade dependencies to latest compatible versions
+    - name: Upgrade dependencies
+      run: |
+        rm -f pubspec.lock
+        flutter pub upgrade --major-versions
+    
     - name: Get dependencies
       run: flutter pub get
     
-    # Step 5: Build split APKs (recommended - smaller files)
     - name: Build Split APKs
       run: flutter build apk --release --split-per-abi
     
-    # Step 6: Upload APKs as artifacts
     - name: Upload APK artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -46,7 +51,6 @@ jobs:
         path: build/app/outputs/flutter-apk/*.apk
         retention-days: 30
     
-    # Step 7: List APK files (for verification)
     - name: List generated APKs
       run: |
         echo "Generated APK files:"
