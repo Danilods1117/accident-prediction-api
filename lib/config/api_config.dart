@@ -4,14 +4,16 @@ class ApiConfig {
   // ========================================
 
   // PRODUCTION: Replace this with your deployed API URL after deployment
-  // Example: 'https://accident-prediction-api-xxxx.onrender.com'
+  // Example: 'https://accident-prediction-api.onrender.com'
   // Example: 'https://your-app.up.railway.app'
   static const String productionUrl = 'https://accident-prediction-api.onrender.com';
 
   // DEVELOPMENT: Localhost URLs for testing
-  static const String localhostAndroid = 'http://10.0.2.2:5000'; // Android emulator
+  static const String localhostAndroidEmulator = 'http://10.0.2.2:5000'; // Android emulator
+  static const String localhostAndroidRealPhone = 'http://127.0.0.1:5000'; // Real phone via ADB reverse
   static const String localhostIOS = 'http://localhost:5000'; // iOS simulator
   static const String localhostWeb = 'http://localhost:5000'; // Web browser
+  static const String localhostWiFi = 'http://192.168.100.146:5000'; // Real phone on same WiFi
 
   // ========================================
   // ENVIRONMENT SELECTION
@@ -24,7 +26,7 @@ class ApiConfig {
   static String get baseUrl {
     if (isLocal) {
       // For local development - you can manually choose which one
-      return localhostAndroid; // Change this based on your platform
+      return localhostAndroidRealPhone; // Using ADB port forwarding via USB
     } else {
       return productionUrl;
     }
