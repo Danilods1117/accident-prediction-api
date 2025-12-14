@@ -11,7 +11,7 @@ if (flutterRoot == null) {
     flutterRoot = System.getenv('FLUTTER_ROOT')
 }
 if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in local.properties or set FLUTTER_ROOT environment variable.")
+    throw new FileNotFoundException("Flutter SDK not found. Define location with flutter.sdk in local.properties or FLUTTER_ROOT environment variable.")
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -24,17 +24,14 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-// Set Flutter source directory before applying flutter.gradle
-project.ext.flutterSourceDir = '../..'
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "com.example.accident_prone_app"
-    compileSdk 35
-    ndkVersion "25.1.8937393"
+    namespace 'com.example.accident_prone_app'
+    compileSdkVersion 35
+    ndkVersion '25.1.8937393'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -51,7 +48,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.accident_prone_app"
+        applicationId 'com.example.accident_prone_app'
         minSdkVersion 21
         targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
