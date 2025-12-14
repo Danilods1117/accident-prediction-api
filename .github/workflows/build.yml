@@ -14,7 +14,7 @@ jobs:
     steps:
     # Step 1: Checkout code
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     # Step 2: Setup Java 17
     - name: Setup Java
@@ -40,7 +40,7 @@ jobs:
     
     # Step 6: Upload APKs as artifacts
     - name: Upload APK artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: release-apk
         path: build/app/outputs/flutter-apk/*.apk
