@@ -4,6 +4,9 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val flutterVersionCode = project.properties["flutter.versionCode"]?.toString() ?: "1"
+val flutterVersionName = project.properties["flutter.versionName"]?.toString() ?: "1.0"
+
 android {
     namespace = "com.example.accident_prone_app"
     compileSdk = 35
@@ -12,8 +15,8 @@ android {
         applicationId = "com.example.accident_prone_app"
         minSdk = 21
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = flutterVersionCode.toInt()
+        versionName = flutterVersionName
     }
 
     compileOptions {
@@ -39,7 +42,7 @@ android {
 }
 
 flutter {
-    source = rootProject.projectDir.parentFile // Flutter project root
+    source = rootProject.projectDir.parentFile
 }
 
 dependencies {

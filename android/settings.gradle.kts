@@ -9,7 +9,9 @@ pluginManagement {
 
         properties.getProperty("flutter.sdk")
             ?: System.getenv("FLUTTER_ROOT")
-            ?: error("Flutter SDK not found. Set flutter.sdk in local.properties or FLUTTER_ROOT")
+            ?: error(
+                "Flutter SDK not found. Set flutter.sdk in local.properties or FLUTTER_ROOT"
+            )
     }
 
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
