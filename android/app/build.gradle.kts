@@ -1,48 +1,41 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-android {
-    namespace = "com.example.predicted_app"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+val flutterVersionCode = project.properties["flutter.versionCode"]?.toString() ?: "1"
+val flutterVersionName = project.properties["flutter.versionName"]?.toString() ?: "1.0"
 
+android {
+    namespace = "com.example.accident_prone_app"
+    compileSdk = 35
+    
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
         isCoreLibraryDesugaringEnabled = true
     }
+    
     kotlinOptions {
         jvmTarget = "11"
     }
     
     lint {
-        checkReleaseBuilds=false
-        abortOnError=false
+        checkReleaseBuilds = false
+        abortOnError = false
     }
-
+    
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.predicted_app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        applicationId = "com.example.accident_prone_app"
+        minSdk = 21
+        targetSdk = 35
+        versionCode = flutterVersionCode.toInt()
+        versionName = flutterVersionName
     }
-
+    
     buildTypes {
-        debug {
-            isMinifyEnabled = false
-            isShrinkResources = false
-        }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
